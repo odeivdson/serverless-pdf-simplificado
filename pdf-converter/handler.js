@@ -1,15 +1,4 @@
-const path = require( 'path' );
-const fs = require( 'fs' );
-const lambdafs = require( 'lambdafs' );
-const { execSync } = require( 'child_process' );
-const util = require( 'util' )
-
-const inputPath = path.join( '/opt/nodejs', 'lo.tar.br' );
-const outputPath = '/tmp/';
-const dateNow = ( new Date() ).getTime();
-const fileName = `${dateNow}`;
-const dirName = `/tmp/dir-${fileName}`;
-const writeFilePromisified = util.promisify( fs.writeFile )
+const { pdfConverterService } = require('./pdf-converter.service');
 
 module.exports.handler = async ( event, context ) => {
   try {
@@ -32,33 +21,11 @@ module.exports.handler = async ( event, context ) => {
       };
     }
     
-    await lambdafs.inflate( inputPath )
-
-    fs.mkdirSync( dirName, { recursive: true } );
-    fs.createWriteStream( `${outputPath}${fileName}` );
-
-
-    const docxBuffer = Buffer.from( body.contentBase64, 'base64' )
-
-    await writeFilePromisified( `${outputPath}${fileName}.docx`, docxBuffer );
-
-    execSync( 'export HOME=/tmp' )
-
-    const convertCommand = `/tmp/lo/instdir/program/soffice.bin --headless --norestore --invisible --nodefault --nofirststartwizard --nolockcheck --nologo --convert-to "pdf:writer_pdf_Export" --outdir ${dirName} /tmp/${fileName}.docx`;
-
-    try {
-      console.log( execSync( convertCommand ).toString( 'utf8' ) );
-    } catch ( e ) {
-      console.log( execSync( convertCommand ).toString( 'utf8' ) );
-    }
-
-    let filePdfBuffer = fs.readFileSync( `${dirName}/${fileName}.pdf` );
-
-    const filePdfBase64 = filePdfBuffer.toString( 'base64' )
+    const contentBase64 = await pdfConverterService(body.contentBase64);
 
     return {
       statusCode: 200,
-      body: JSON.stringify( { contentBase64: filePdfBase64 } ),
+      body: JSON.stringify( { contentBase64 } ),
     };
 
   } catch ( error ) {

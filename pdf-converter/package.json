@@ -11,9 +11,7 @@
     "dev": "sls offline start"
   },
   "license": "ISC",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
     "serverless-offline": "^8.8.0",
     "serverless-plugin-optimize": "^4.2.1-rc.1",

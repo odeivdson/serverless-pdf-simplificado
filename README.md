@@ -33,7 +33,7 @@ POST Body {
 
 ### Todo
 - Criar testes unitários
-- Processar variáveis no documento (substituição de variáveis)
+- Receber variáveis para processar no Docx automáticamente (antes da conversão em PDF)
 
 ---
 ### Importante

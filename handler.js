@@ -2,19 +2,14 @@ const path = require( 'path' );
 const fs = require( 'fs' );
 const lambdafs = require( 'lambdafs' );
 const { execSync } = require( 'child_process' );
+const util = require( 'util' )
 
-const inputPath = path.join( '/opt', 'lo.tar.br' );
+const inputPath = path.join( '/opt/nodejs', 'lo.tar.br' );
 const outputPath = '/tmp/';
 const dateNow = ( new Date() ).getTime();
 const fileName = `${dateNow}`;
-
-const util = require( 'util' )
-const writeFilePromisified = util.promisify( fs.writeFile )
-
 const dirName = `/tmp/dir-${fileName}`;
-
-
-
+const writeFilePromisified = util.promisify( fs.writeFile )
 
 module.exports.handler = async ( event, context ) => {
   try {
@@ -36,7 +31,7 @@ module.exports.handler = async ( event, context ) => {
         body: JSON.stringify( { error: 'Base64 inválido.' } ),
       };
     }
-
+    
     await lambdafs.inflate( inputPath )
 
     fs.mkdirSync( dirName, { recursive: true } );

@@ -5,7 +5,7 @@ frameworkVersion: '3'
 plugins:
   - serverless-offline
   - serverless-stage-manager
-  - serverless-plugin-optimize
+#  - serverless-plugin-optimize
 
 custom:
   stages:

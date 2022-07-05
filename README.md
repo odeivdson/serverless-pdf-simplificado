@@ -3,14 +3,11 @@ https://www.serverless.com/framework/docs
 
 
 ####
-### Start 
-```
-# Instalação de dependências:
-npm install
+### Projeto
 
-# Serverless offline
-npm run start
-```
+- layer: Camada libreoffice
+- pdf-converter: Função lambda para conversão de docx em PDF
+
 
 ### Deploy
 ```
@@ -18,7 +15,11 @@ npm run start
 aws configure
 
 # Execute o deploy automatizado:
-npm run deploy
+$ cd pdf-converter
+$ npm install
+$ npm run deploy
+
+- Acesse o arquivo README.md do diretório layer e siga as dicas para adicionar a layer em sua lambda function
 ```
 
 ### Endpoint:
@@ -32,7 +33,6 @@ POST Body {
 
 ### Todo
 - Criar testes unitários
-- Criar Layer própria (não depender da layer libreoffice)
 - Processar variáveis no documento (substituição de variáveis)
 
 ---

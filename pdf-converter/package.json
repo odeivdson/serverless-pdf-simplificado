@@ -1,0 +1,22 @@
+{
+  "name": "serverless-pdf-simplificado",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "author": "Deivdson Oliveira",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "sls deploy --stage dev",
+    "start": "sls offline start",
+    "dev": "sls offline start"
+  },
+  "license": "ISC",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "serverless-offline": "^8.8.0",
+    "serverless-plugin-optimize": "^4.2.1-rc.1",
+    "serverless-stage-manager": "^1.0.5"
+  }
+}
